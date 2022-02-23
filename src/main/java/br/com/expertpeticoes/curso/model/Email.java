@@ -18,11 +18,22 @@ public class Email {
 	private String email;
 	private Boolean cursoGratuito;
 	private Boolean cursoPago;
-	private Boolean Propaganda;
+	private Boolean propaganda;
 	@OneToOne(mappedBy = "email")
 	@PrimaryKeyJoinColumn
 	private Venda venda;
 	
+	public Email() {
+		
+	}
+	
+	public Email(String email, Boolean cursoGratuito, Boolean cursoPago, Boolean propaganda) {
+		super();
+		this.email = email;
+		this.cursoGratuito = cursoGratuito;
+		this.cursoPago = cursoPago;
+		this.propaganda = propaganda;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -59,11 +70,11 @@ public class Email {
 	}
 	
 	public Boolean getPropaganda() {
-		return Propaganda;
+		return propaganda;
 	}
 	
 	public Email setPropaganda(Boolean propaganda) {
-		Propaganda = propaganda;
+		this.propaganda = propaganda;
 		return this;
 	}
 	public Venda getVenda() {
@@ -74,5 +85,9 @@ public class Email {
 		return this;
 	}
 	
+	@Override
+	public String toString() {
+		return this.email;
+	}
 	
 }

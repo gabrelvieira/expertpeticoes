@@ -41,4 +41,18 @@ public class CursoEmail {
 		return "<h1 style=\"text-align:center; color:green\">Email enviado com sucesso</h1>";
 	}
 	
+	public void sendEmailFree(String to) {
+		MimeMessage message = emailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			helper.setFrom("gabrielvieira3101@gmail.com");
+			helper.setTo(to);
+			helper.setSubject("Curso de Advocacia gratis");
+			helper.setText("<body> <h1 style=\"color:red\">Aqui está nosso material de qualidade</h1> <p>Mas aqui segue o link " + oneDrive.getLink("/Imagens/gabriel/apache.zip") + "</p></body>", true);
+		} catch (MessagingException e) { 
+			System.out.println("deu errado");
+		}
+		System.out.println("enviando email");
+		emailSender.send(message);
+	}
 }

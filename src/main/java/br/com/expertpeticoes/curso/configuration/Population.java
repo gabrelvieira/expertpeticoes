@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.configuration;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class Population {
 				.setCursoPago(true)
 				.setPropaganda(true)
 				.setVenda(venda));
-		venda.setValor(new BigInteger("50"));
+		venda.setValor(new BigDecimal("50"));
 		
 		vendas.add(venda);
 		
@@ -48,7 +49,7 @@ public class Population {
 				.setCursoPago(true)
 				.setPropaganda(true)
 				.setVenda(venda1));
-		venda1.setValor(new BigInteger("40"));
+		venda1.setValor(new BigDecimal("40"));
 		
 		vendas.add(venda1);
 
@@ -59,7 +60,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda2));
-		venda2.setValor(new BigInteger("60"));
+		venda2.setValor(new BigDecimal("60"));
 		
 		vendas.add(venda2);
 
@@ -70,7 +71,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda3));
-		venda3.setValor(new BigInteger("40"));
+		venda3.setValor(new BigDecimal("40"));
 		
 		vendas.add(venda3);
 
@@ -81,7 +82,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda4));
-		venda4.setValor(new BigInteger("50"));
+		venda4.setValor(new BigDecimal("50"));
 		
 		vendas.add(venda4);
 
@@ -92,7 +93,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda5));
-		venda5.setValor(new BigInteger("50"));
+		venda5.setValor(new BigDecimal("50"));
 		
 		vendas.add(venda5);
 
@@ -103,7 +104,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda6));
-		venda6.setValor(new BigInteger("50"));
+		venda6.setValor(new BigDecimal("50"));
 		
 		vendas.add(venda6);
 
@@ -112,9 +113,9 @@ public class Population {
 		venda7.setEmail(new Email().setEmail("gabrielcursoa@outlook.com")
 				.setCursoGratuito(true)
 				.setCursoPago(false)
-				.setPropaganda(true)
+				.setPropaganda(false)
 				.setVenda(venda7));
-		venda7.setValor(new BigInteger("80"));
+		venda7.setValor(new BigDecimal("80"));
 		
 		vendas.add(venda7);
 
@@ -125,7 +126,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda8));
-		venda8.setValor(new BigInteger("50"));
+		venda8.setValor(new BigDecimal("50"));
 		
 		vendas.add(venda8);
 
@@ -136,7 +137,7 @@ public class Population {
 				.setCursoPago(false)
 				.setPropaganda(true)
 				.setVenda(venda9));
-		venda9.setValor(new BigInteger("30"));
+		venda9.setValor(new BigDecimal("30"));
 		
 		vendas.add(venda9);
 		

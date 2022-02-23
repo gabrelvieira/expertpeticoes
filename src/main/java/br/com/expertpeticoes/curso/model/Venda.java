@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.model;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
@@ -27,7 +28,7 @@ public class Venda {
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Email email;
 	private LocalDate data;
-	private BigInteger valor;
+	private BigDecimal valor;
 	
 	public Long getId() {
 		return id;
@@ -53,11 +54,11 @@ public class Venda {
 		this.data = data;
 	}
 	
-	public BigInteger getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 	
-	public void setValor(BigInteger valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	

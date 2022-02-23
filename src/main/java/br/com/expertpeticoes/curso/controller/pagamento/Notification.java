@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
@@ -31,8 +32,9 @@ import okhttp3.Response;
 @Controller
 public class Notification {
 
-	private static final String ACCESS_TOKEN = "TEST-3256739264421310-021300-d2d0f21bf5d9d12f56409ded7aa3f2fd-306346999";
-
+	@Autowired
+	private DadosPayment dadosPayment;
+	
 	@Autowired
 	private CursoEmail emailSender;
 	
@@ -44,8 +46,9 @@ public class Notification {
 	@Transactional
 	public ResponseEntity<?> notificacao(@RequestBody(required = true) NotificationForm notification) {
 		OkHttpClient client = new OkHttpClient();
+		System.out.println("to aqui");
 		Request request = new Request.Builder().url(
-				"https://api.mercadopago.com/v1/payments/" + notification.getData().getId() + "?access_token=" + ACCESS_TOKEN)
+				"https://api.mercadopago.com/v1/payments/" + notification.getData().getId() + "?access_token=" + dadosPayment.getAcessToken())
 				.build();
 
 		Response response = null;
@@ -60,15 +63,14 @@ public class Notification {
 		try {
 			js = (JSONObject) new JSONParser().parse(response.body().string());
 		} catch (Exception e) {
-
+			System.out.println();
 		}
 		if (js.get("status").toString().equals("approved")) {
 			try {
 				sendMail(js);
-				
+				System.out.println(js.toString());
 				persist(js);
-				
-			} catch (Exception e) {}
+			} catch (Exception e) {e.printStackTrace();}
 		}
 		return ResponseEntity.ok().build();
 	}
@@ -82,11 +84,17 @@ public class Notification {
 	
 	private void persist(JSONObject js) {
 		
+		try {
+			js = (JSONObject) new JSONParser().parse(js.get("payer").toString());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		Optional<Venda> vendaOptional =
 				vendaRepository.findByEmail(js.get("email").toString());
 		
-		if(vendaOptional.get() == null) {
-			Venda venda = vendaOptional.get();
+		if(!vendaOptional.isPresent()) {
+			Venda venda = new Venda();
 			venda.setData(LocalDate.now());
 			venda.setEmail(new Email().setEmail(js.get("email").toString())
 					.setCursoGratuito(false)
@@ -94,10 +102,18 @@ public class Notification {
 					.setPropaganda(true)
 					.setVenda(venda));
 			
+			if(this.dadosPayment.getPromocao()) {
+				venda.setValor(this.dadosPayment.getValorPromocional());
+			}else {
+				venda.setValor(this.dadosPayment.getValor());
+			}
+			
+			System.out.println(venda.getEmail().getEmail());
+			
 			this.vendaRepository.save(venda);
 		}
 		
-		if(vendaOptional.get() != null) {
+		if(vendaOptional.isPresent()) {
 			Venda venda = vendaOptional.get();
 			venda.getEmail().setCursoPago(true);
 			venda.setData(LocalDate.now());

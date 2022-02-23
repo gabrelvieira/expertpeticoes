@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.model.dto;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class VendaDto {
 
 	private String email;
 	private LocalDate data;
-	private BigInteger valor;
+	private BigDecimal valor;
 	
 	public String getEmail() {
 		return email;
@@ -29,11 +30,11 @@ public class VendaDto {
 		this.data = data;
 	}
 	
-	public BigInteger getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 	
-	public void setValor(BigInteger valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	

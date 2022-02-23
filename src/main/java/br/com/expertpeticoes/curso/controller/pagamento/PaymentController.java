@@ -2,6 +2,7 @@ package br.com.expertpeticoes.curso.controller.pagamento;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +24,15 @@ import com.mercadopago.resources.datastructures.preference.PaymentMethods;
 @RequestMapping("/payment")
 public class PaymentController {
 
-	private static final String ACCESS_TOKEN = "TEST-3256739264421310-021300-d2d0f21bf5d9d12f56409ded7aa3f2fd-306346999";
-
-	@GetMapping("/card")
+	@Autowired
+	private DadosPayment dados;
+	
+	@GetMapping
 	public String paymentCard() throws Exception {
 
-		MercadoPago.SDK.setAccessToken(ACCESS_TOKEN);
+		MercadoPago.SDK.setAccessToken(dados.getAcessToken());
 
 		Preference preference = new Preference();
-
 		
 		PaymentMethods paymentMethods = new PaymentMethods();
 		paymentMethods.setInstallments(5);
@@ -40,15 +41,10 @@ public class PaymentController {
 		item.setId("123")
 		.setTitle("Petições do Expert Petições")
 		.setQuantity(1)
-		.setUnitPrice((float) 50)
-		.setDescription("Coletania de petiçõesssss");
+		.setUnitPrice(Float.valueOf(dados.getValor().toString()))
+		.setDescription("Coletania de petições");
 		
-		try {
-			MercadoPago.SDK.setAccessToken(ACCESS_TOKEN);
-		} catch (Exception e) {
-			System.out.println("opa");
-		}
-		
+	
 		BackUrls back = new BackUrls()
 				.setSuccess("http://localhost/notification")
 				.setFailure("http://localhost/notification")
@@ -56,8 +52,7 @@ public class PaymentController {
 		preference.setPaymentMethods(paymentMethods);
 		try {
 			preference.appendItem(item)
-				.setBackUrls(back)
-				.setNotificationUrl("https://webhook.site/c1caf461-04d6-4a14-81b3-16887c9a123d");
+				.setBackUrls(back);
 			preference.save();
 		} catch (Exception e) {
 			
