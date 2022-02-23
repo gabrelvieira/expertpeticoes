@@ -1,7 +1,6 @@
 package br.com.expertpeticoes.curso.controller;
 
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.expertpeticoes.curso.email.CursoEmail;
 import br.com.expertpeticoes.curso.model.Email;
@@ -38,9 +36,7 @@ public class CursoGratuito {
 		this.email.sendEmailFree(emailForm.getEmail());
 		Optional<Email> optionalEmail = this.emailRepository.findByEmail(emailForm.getEmail());
 		
-		System.out.println(optionalEmail.isEmpty());
-		
-		if(optionalEmail.isEmpty()) {
+		if(!optionalEmail.isPresent()) {
 			Email email = new Email(emailForm.getEmail(),
 					true, false, true);
 			this.emailRepository.save(email);
