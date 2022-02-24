@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.expertpeticoes.curso.controller.onedrive.OneDrive;
 
-
-
 @Service
 public class CursoEmail {
 	

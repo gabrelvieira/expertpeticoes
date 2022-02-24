@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import br.com.expertpeticoes.curso.repository.EmailRepository;
 
 @RestController
 @RequestMapping("/adm/email")
+@CrossOrigin
 public class EmailPromocionalController {
 
 	@Autowired

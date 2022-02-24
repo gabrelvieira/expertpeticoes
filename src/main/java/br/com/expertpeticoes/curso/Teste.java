@@ -7,14 +7,26 @@ import com.google.gson.Gson;
 
 import br.com.expertpeticoes.curso.model.Email;
 import br.com.expertpeticoes.curso.model.form.EmailForm;
+import okhttp3.OkHttp;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class Teste {
 
 	public static void main(String[] args) {
-		String json = "{\"email\":\"gabrielvieira3101@gmail.com\", "
-				+ "\"id\":\"432\"}";
-		EmailForm email = new Gson().fromJson(json, EmailForm.class);
+		OkHttpClient ok = new OkHttpClient();
+		Request request = new Request.Builder().url("https://expertpeticoes.com/adm/api/vendas?value=null&type=ALL&page=1&direction=ASC").build();
 		
-		System.out.println(email.getEmail());
+		Response response = null;
+		
+		try {
+			response =ok.newCall(request).execute();
+			System.out.println(response.body().string());
+		} catch(Exception e) {
+			
+		}
+		System.out.println("acabou");
+		
 	}
 }
