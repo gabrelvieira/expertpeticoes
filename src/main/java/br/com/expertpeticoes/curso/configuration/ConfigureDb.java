@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,9 @@ import oracle.jdbc.pool.OracleDataSource;
 @Configuration
 public class ConfigureDb {
 
+	@Value(value = "${oracle.connection.path}")
+	private String path;
+	
 	@Bean
 	public DataSource getDataSource() throws Exception{
 		System.out.println("opa");
@@ -23,7 +27,7 @@ public class ConfigureDb {
 		  
 
 		    OracleDataSource ods = new OracleDataSource();
-		    ods.setURL("jdbc:oracle:thin:@db202202231845_medium?TNS_ADMIN=C:/Users/Usuario/Desktop/Portifolio/aplicacaojava/oracle");    
+		    ods.setURL("jdbc:oracle:thin:@db202202231845_medium?TNS_ADMIN=" + path);    
 		    ods.setConnectionProperties(info);
 		    System.out.println("acabou");
 		    return ods;
