@@ -14,7 +14,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mercadopago.resources.datastructures.advancedpayment.Payment;
+import com.mercadopago.resources.datastructures.payment.Payer;
 
 import br.com.expertpeticoes.curso.model.RelatorioVenda;
 import br.com.expertpeticoes.curso.model.TypeQuery;
@@ -30,6 +34,7 @@ public class VendaController {
 	private VendaRepository vendaRepository;
 	
 	@GetMapping("/vendas")
+	@ResponseBody
 	public RelatorioVenda getVendas(
 			@RequestParam(required = true, name = "type") TypeQuery type,
 			@RequestParam(required = true, name = "value") String value,
@@ -38,6 +43,7 @@ public class VendaController {
 		
 		Page<Venda> vendas = null;
 		page--;
+		
 		
 		Pageable pageable = PageRequest.of(page, 10, Sort.by(direction, "data"));
 		
