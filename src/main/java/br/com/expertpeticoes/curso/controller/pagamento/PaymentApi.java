@@ -23,11 +23,12 @@ public class PaymentApi {
 	@Autowired
 	private DadosPayment dados;
 	
-	@PutMapping("/valor")
+	@PutMapping("/valores")
 	public ResponseEntity<?> setValor(@RequestBody DadosPaymentForm form){
 		
 		dados.setValor(form.getValor());
 		dados.setPromocao(form.getPromocao());
+		System.out.println(form.getPromocao());
 		dados.setValorPromocional(form.getValorPromocional());
 		
 		return ResponseEntity.ok().build();
