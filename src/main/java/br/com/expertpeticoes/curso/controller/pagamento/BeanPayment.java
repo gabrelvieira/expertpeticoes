@@ -17,5 +17,4 @@ public class BeanPayment {
 		dados.setValorPromocional(new BigDecimal("50"));
 		return dados;
 	}
-	
 }

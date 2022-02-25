@@ -40,18 +40,23 @@ public class PaymentController {
 		paymentMethods.setInstallments(5);
 		
 		Item item = new Item();
-		item.setId("123")
-		.setTitle("Petições do Expert Petições")
+		item.setId("1")
+		.setTitle("Expert Petições")
 		.setQuantity(1)
-		.setUnitPrice(Float.valueOf(dados.getValor().toString()))
 		.setDescription("Coletania de petições");
 		
-	
+		if(this.dados.getPromocao()) {
+			item.setUnitPrice(Float.valueOf(this.dados.getValorPromocional().toString()));
+		} else {
+			item.setUnitPrice(Float.valueOf(this.dados.getValor().toString()));
+		}
+		
 		BackUrls back = new BackUrls()
-				.setSuccess("http://localhost/notification")
-				.setFailure("http://localhost/notification")
-				.setPending("http://localhost/notification");
+				.setSuccess("https://www.expertpeticoes.com/")
+				.setFailure("https://www.expertpeticoes.com/")
+				.setPending("https://www.expertpeticoes.com/");
 		preference.setPaymentMethods(paymentMethods);
+		
 		try {
 			preference.appendItem(item)
 				.setBackUrls(back);

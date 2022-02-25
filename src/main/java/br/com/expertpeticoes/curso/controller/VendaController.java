@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.controller;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;

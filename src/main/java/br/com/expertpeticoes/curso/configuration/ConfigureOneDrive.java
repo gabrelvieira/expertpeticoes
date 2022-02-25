@@ -4,14 +4,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.expertpeticoes.curso.controller.onedrive.OneDrive;
+import br.com.expertpeticoes.curso.model.dto.OneDrivePathDto;
 
 @Configuration
 public class ConfigureOneDrive {
 
 	@Bean
 	public OneDrive getOneDrive() {
-		String refresh = "M.R3_BAY.-Cfm!tWBa256vQE2Bo!eZlbB2s5KFyJbmYRHLOepGUrs2l0!TKhhL57vwVIImPseyW41Et7zsdzz8Xc3aIAk3*aDxSqOfq1R9u7n4rRpMsDXiNlZML3l0gUrevVcWQepm!XRGau3fcxex3EIlAPOICaO8vg4xuiCVfnSJPqxSLTx*llbSgPI2TzvbnBNu4DAfj7Rq3DI27TJoeC*BM3p3wqY7ReY6Y1jiWM2!pCz8makuRw9Kwmw3RmMdDuOx091nxMUJscS3IQTM3Ed13!S*YNiFL5mYz5WD7oTEc*Y22Uf44j4UdNy5KdMwPScI!cdI!w$$";
+		String refresh = "M.R3_BAY.-CV9*SdZfwvPozwrjSWS7WD!dHXvaXBM1AhHOhLaA*F3WcfJKR!xbXBjTGtLlT9BcsnsypPZ*4kur4sDukKVJmxw6g4TaqwukLabPGKZrXU86KHangH*AcTHfBF!HlnBP1uE9GWOZ*WRLevsV!4Nh6TFlxpV5883PnrbkkCqYfZIcjIAuWncrbziogEqsgeHXGlcYffAvFqGKtY1dByuBDql8!u7z*o6a8Hd7siRajrzvluX92nbvXuXvJj4*uBnPRGXXeVXgbSQjVUqRQbenigpiwfkoh*CYXurnW65dYn4KSxz!*uN9rAVvUe*8cin7LA$$";
 		OneDrive oneDrive = new OneDrive(refresh, "MjX7Q~JOzNddrpR3K-XZcmRYCtOf61ZBsPnPg", "http://localhost/auth");
 		return oneDrive;
+	}
+	
+	@Bean
+	public OneDrivePathDto getPath() {
+		OneDrivePathDto path = new OneDrivePathDto();
+		path.setPathGratis("/Imagens/gabriel/apache.zip");
+		path.setPathPago("/Imagens/gabriel/apache.zip");
+		return path;
 	}
 }

@@ -12,9 +12,6 @@ import br.com.expertpeticoes.curso.email.CursoEmail;
 @SpringBootApplication
 public class CursoApplication {
 
-	@Autowired
-	private static Population pop;
-	
 	public static void main(String[] args) {
 		SpringApplication.run(CursoApplication.class, args);
 	}

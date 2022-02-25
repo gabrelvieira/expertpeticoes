@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import br.com.expertpeticoes.curso.controller.onedrive.OneDrive;
+import br.com.expertpeticoes.curso.model.dto.OneDrivePathDto;
 
 @Service
 public class CursoEmail {
@@ -22,6 +23,9 @@ public class CursoEmail {
 	@Autowired
 	private OneDrive oneDrive;
 	
+	@Autowired
+	private OneDrivePathDto path;
+	
 	public String sendMail(String to) throws Exception{
 		MimeMessage message = emailSender.createMimeMessage();
 		try {
@@ -29,7 +33,7 @@ public class CursoEmail {
 			helper.setFrom("gabrielvieira3101@gmail.com");
 			helper.setTo(to);
 			helper.setSubject("Curso de Advocacia");
-			helper.setText("<body> <h1 style=\"color:red\">Aqui está nosso material de qualidade</h1> <p>Mas aqui segue o link " + oneDrive.getLink("/Imagens/gabriel/apache.zip") + "</p></body>", true);
+			helper.setText("<body> <h1 style=\"color:red\">Aqui está nosso material de qualidade</h1> <p>Mas aqui segue o link " + oneDrive.getLink(path.getPathPago()) + "</p></body>", true);
 		} catch (MessagingException e) {
 			System.out.println("deu errado");
 		}
@@ -46,7 +50,7 @@ public class CursoEmail {
 			helper.setFrom("gabrielvieira3101@gmail.com");
 			helper.setTo(to);
 			helper.setSubject("Curso de Advocacia gratis");
-			helper.setText("<body> <h1 style=\"color:red\">Aqui está nosso material de qualidade</h1> <p>Mas aqui segue o link " + oneDrive.getLink("/Imagens/gabriel/apache.zip") + "</p></body>", true);
+			helper.setText("<body> <h1 style=\"color:red\">Aqui está nosso material de qualidade</h1> <p>Mas aqui segue o link " + oneDrive.getLink(path.getPathGratis()) + "</p></body>", true);
 		} catch (MessagingException e) { 
 			System.out.println("deu errado");
 		}

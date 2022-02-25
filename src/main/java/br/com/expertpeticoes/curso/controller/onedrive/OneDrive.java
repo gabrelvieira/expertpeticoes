@@ -113,4 +113,12 @@ public class OneDrive {
 	public void setToken(String token) {
 		this.access_token = token;
 	}
+	
+	public void setRefreshToken(String refresh) {
+		this.refresh_token = refresh;
+	}
+	
+	public String getRefreshToken() {
+		return this.refresh_token;
+	}
 }

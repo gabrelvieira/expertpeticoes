@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import br.com.expertpeticoes.curso.model.dto.VendaDto;
@@ -16,6 +17,7 @@ public class RelatorioVenda {
 		this.page = page;
 	}
 	
+
 	public List<VendaDto> getPayments() {
 		return payments;
 	}

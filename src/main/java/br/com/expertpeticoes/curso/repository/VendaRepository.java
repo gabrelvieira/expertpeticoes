@@ -1,5 +1,6 @@
 package br.com.expertpeticoes.curso.repository;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -39,4 +40,6 @@ public interface VendaRepository extends JpaRepository<Venda, Long>{
 			@Param(value = "inicial") LocalDate dataInicial,
 			@Param(value = "final") LocalDate dataFinal);
 	
+	@Query(value = "SELECT SUM(v.valor) FROM Venda v")
+	public BigDecimal getValorTotal();
 }

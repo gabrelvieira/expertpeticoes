@@ -14,6 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ import br.com.expertpeticoes.curso.email.events.EmailEvent;
 import br.com.expertpeticoes.curso.email.events.publisherEmail;
 import br.com.expertpeticoes.curso.model.Email;
 import br.com.expertpeticoes.curso.model.form.EmailPromocional;
+import br.com.expertpeticoes.curso.model.form.EmailPromocionalTest;
 import br.com.expertpeticoes.curso.repository.EmailRepository;
 
 @RestController
@@ -36,10 +38,10 @@ public class EmailPromocionalController {
 	@Autowired
 	private EmailRepository emailRepository;
 	
-	@Autowired 
+	@Autowired
 	private publisherEmail publishEmail;
 	
-	@GetMapping("/sendPromotion")
+	@PostMapping("/sendPromotion")
 	public ResponseEntity<?> sendMail(@RequestBody EmailPromocional emailPromocional) throws AddressException {
 		EmailEvent event = new EmailEvent(this, emailPromocional);
 		
@@ -50,14 +52,14 @@ public class EmailPromocionalController {
 	}
 	
 	@GetMapping("/testPromotion")
-	public ResponseEntity<?> sendTesteEmail(@RequestBody EmailPromocional emailPromocional) {
+	public ResponseEntity<?> sendTesteEmail(@RequestBody EmailPromocionalTest emailPromocional) {
 		
 		MimeMessage message = emailSender.createMimeMessage();
 		
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom("gabrielvieira3101@gmail.com");
-			helper.setTo("expertpeticoes@outlook.com");
+			helper.setTo(emailPromocional.getTo());
 			helper.setSubject(emailPromocional.getTitle());
 			helper.setText("<body> <h1 style=\"color:red\">" + emailPromocional.getBody() + "</h1></body>",
 					true);
