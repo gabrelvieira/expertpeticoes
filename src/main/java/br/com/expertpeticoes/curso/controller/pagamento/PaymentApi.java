@@ -23,7 +23,7 @@ public class PaymentApi {
 	@Autowired
 	private DadosPayment dados;
 	
-	@PutMapping("/valores")
+	@PutMapping("/valor")
 	public ResponseEntity<?> setValor(@RequestBody DadosPaymentForm form){
 		
 		dados.setValor(form.getValor());
